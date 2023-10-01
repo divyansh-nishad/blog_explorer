@@ -30,11 +30,11 @@ class _BlogListScreenState extends State<BlogListScreen> {
         '32qR4KmXOIpsGPQKMqEJHGJS27G5s7HdSKO3gdtQd2kv5e852SiYwWNfxkZOBuQ6';
 
     try {
-      print('Fetching blogs...');
+      // print('Fetching blogs...');
       final response = await http.get(Uri.parse(url), headers: {
         'x-hasura-admin-secret': adminSecret,
       });
-      print('Response status: ${response.statusCode}');
+      // print('Response status: ${response.statusCode}');
 
       if (response.statusCode == 200) {
         // print(jsonDecode(response.body));
@@ -43,7 +43,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
 
         if (responseData.containsKey('blogs')) {
           final List<dynamic> blogs = responseData['blogs'];
-          print(blogs);
+          // print(blogs);
           final blogBox = Hive.box<BlogModel>('blogs');
           blogBox.clear(); // Clear existing data
           blogs.forEach((blog) {
@@ -65,8 +65,23 @@ class _BlogListScreenState extends State<BlogListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
-        title: Text('Blog Explorer'),
+        // title: Text('Subspace'),
+        backgroundColor: Colors.grey.shade800,
+        leading: Padding(
+          padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+          child: Image.network(
+              'https://subspace.money/index_files/subspace_hor.svg',
+              width: 60,
+              height: 20),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.menu_rounded),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: blogBox.isEmpty
           ? Center(child: CircularProgressIndicator())
@@ -74,12 +89,33 @@ class _BlogListScreenState extends State<BlogListScreen> {
               itemCount: blogBox.length,
               itemBuilder: (context, index) {
                 final BlogModel blog = blogBox.getAt(index)!;
-                print(blog.content);
+                // print(blog.content);
                 return Column(
                   children: [
-                    Text(blog.title),
-                    Image.network(
-                        'https://cdn.subspace.money/whatsub_blogs/slate(1).png'),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Image.network(
+                        blog.content,
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          MediaQuery.of(context).size.width * 0.1,
+                          0,
+                          MediaQuery.of(context).size.width * 0.1,
+                          16),
+                      child: Text(
+                        blog.title,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 16),
                   ],
                 );
               },
