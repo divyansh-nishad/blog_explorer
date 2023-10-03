@@ -28,7 +28,7 @@ class _BlogListScreenState extends State<BlogListScreen> {
       backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
         // title: Text('Subspace'),
-        backgroundColor: Colors.grey.shade800,
+        backgroundColor: Colors.grey[850],
         leading: Padding(
           padding: const EdgeInsets.fromLTRB(4.0, 0, 0, 0),
           child: SvgPicture.network(
@@ -38,15 +38,29 @@ class _BlogListScreenState extends State<BlogListScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.menu_rounded),
-            onPressed: () {},
+          Padding(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+            child: CircleAvatar(
+              radius: 20,
+              backgroundColor: Colors.white,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.menu_rounded,
+                  color: Colors.black,
+                ),
+                onPressed: () {},
+              ),
+            ),
           ),
         ],
       ),
       body: blogBox.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : BlogList(blogBox: blogBox),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.chat_bubble_rounded),
+      ),
     );
   }
 }
