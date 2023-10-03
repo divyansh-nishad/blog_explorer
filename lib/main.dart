@@ -1,7 +1,7 @@
-import 'package:blog_explorer/blog_model.dart';
+import 'package:blog_explorer/model/blog_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'blog_list_screen.dart';
+import 'screens/blog_list_screen.dart';
 
 void main() async {
   await Hive.initFlutter();
