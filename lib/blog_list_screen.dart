@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:blog_explorer/blog_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -70,11 +71,15 @@ class _BlogListScreenState extends State<BlogListScreen> {
         // title: Text('Subspace'),
         backgroundColor: Colors.grey.shade800,
         leading: Padding(
-          padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-          child: Image.network(
+          padding: const EdgeInsets.fromLTRB(4.0, 0, 0, 0),
+          child: SvgPicture.network(
               'https://subspace.money/index_files/subspace_hor.svg',
-              width: 60,
-              height: 20),
+              width: 80,
+              height: 30),
+          // Image.network(
+          //     'https://subspace.money/index_files/subspace_hor.svg',
+          //     width: 60,
+          //     height: 20),
         ),
         actions: [
           IconButton(
