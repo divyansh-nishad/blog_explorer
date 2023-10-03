@@ -1,3 +1,4 @@
+import 'package:blog_explorer/screens/blog_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class BlogTile extends StatelessWidget {
@@ -7,33 +8,43 @@ class BlogTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
-              img,
-              height: MediaQuery.of(context).size.height * 0.25,
-              width: MediaQuery.of(context).size.width * 0.9,
-              fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlogDetailScreen(img, title),
+          ),
+        );
+      },
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                img,
+                height: MediaQuery.of(context).size.height * 0.25,
+                width: MediaQuery.of(context).size.width * 0.9,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.1,
-              0, MediaQuery.of(context).size.width * 0.1, 16),
-          child: Text(
-            title,
-            textAlign: TextAlign.left,
-            style: const TextStyle(
-              color: Colors.white,
+          Padding(
+            padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.1,
+                0, MediaQuery.of(context).size.width * 0.1, 16),
+            child: Text(
+              title,
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-      ],
+          const SizedBox(height: 16),
+        ],
+      ),
     );
   }
 }
